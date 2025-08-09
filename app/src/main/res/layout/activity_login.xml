@@ -8,22 +8,21 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp"
+    android:background="@drawable/login_background"
     tools:context=".MainActivity">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/log_in"
-        android:layout_marginBottom="40dp"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        />
+    <ImageView
+        android:id="@+id/app_logo"
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/logo" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
+        app:boxBackgroundColor="@color/white"
         app:endIconMode="clear_text"
         app:startIconDrawable="@drawable/email">
 
@@ -40,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:hint="@string/password"
+        app:boxBackgroundColor="@color/white"
         app:endIconMode="password_toggle"
         app:startIconDrawable="@drawable/password">
 
@@ -57,7 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/transparent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        app:cornerRadius="4dp"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/log_in"
@@ -71,18 +74,19 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up_text" />
+            android:text="@string/sign_up_text"
+            android:textColor="@color/black"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/btnSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:backgroundTint="@color/gray"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/sign_up"
-            android:textColor="@color/blue" />
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

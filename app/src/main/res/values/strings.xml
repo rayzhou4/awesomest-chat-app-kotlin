@@ -14,4 +14,6 @@
 
     <!-- Main Activity Strings -->
     <string name="messages">Messages</string>
+    <string name="searchbar_hint">Search</string>
+    <string name="search">Search</string>
 </resources>

@@ -2,33 +2,30 @@ package com.example.awesomechatapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import android.widget.TextView
+import android.widget.TextView.OnEditorActionListener
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.awesomechatapp.ui.theme.AwesomeChatAppTheme
+import com.google.android.material.search.SearchBar
+import com.google.android.material.search.SearchView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
+
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var searchBar: SearchBar
+    private lateinit var searchView: SearchView
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var userList: ArrayList<User>
     private lateinit var adapter: UserAdapter
@@ -46,12 +43,23 @@ class MainActivity : AppCompatActivity() {
         userList = ArrayList()
         adapter = UserAdapter(this, userList)
 
+        searchBar = findViewById(R.id.search_bar)
+        searchBar.inflateMenu(R.menu.searchbar_menu)
+        searchBar.setOnMenuItemClickListener(
+            Toolbar.OnMenuItemClickListener { menuItem: MenuItem? -> true })
+
+        searchView = findViewById(R.id.search_view)
+        searchView.inflateMenu(R.menu.search_view_menu)
+        searchView.setOnMenuItemClickListener(
+            Toolbar.OnMenuItemClickListener { menuItem: MenuItem? -> true })
+
+
         userRecyclerView = findViewById(R.id.userRecyclerView)
 
         userRecyclerView.layoutManager = LinearLayoutManager(this)
         userRecyclerView.adapter = adapter
 
-        mDbRef.child("user").addValueEventListener(object: ValueEventListener {
+        mDbRef.child("user").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userList.clear()
                 for (postSnapshot in snapshot.children) {
@@ -73,6 +81,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+        val searchItem = menu?.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as SearchView
+
+        searchView.setOnMenuItemClickListener(
+            Toolbar.OnMenuItemClickListener { menuItem: MenuItem? -> true })
+
+        searchView
+            .getEditText()
+            .setOnEditorActionListener(
+                OnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
+                    searchBar.setText(searchView.getText())
+                    searchView.hide()
+                    false
+                })
+
         return super.onCreateOptionsMenu(menu)
     }
 

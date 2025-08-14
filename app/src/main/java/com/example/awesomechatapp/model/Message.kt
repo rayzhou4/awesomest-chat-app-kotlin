@@ -1,4 +1,4 @@
-package com.example.awesomechatapp
+package com.example.awesomechatapp.model
 
 class Message {
     var message: String? = null

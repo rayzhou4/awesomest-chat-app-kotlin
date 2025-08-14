@@ -1,4 +1,4 @@
-package com.example.awesomechatapp
+package com.example.awesomechatapp.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,11 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
+import com.example.awesomechatapp.ui.ChatActivity
+import com.example.awesomechatapp.R
+import com.example.awesomechatapp.model.User
+
 
 class UserAdapter(val context: Context, val userList: ArrayList<User>):
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+
+    private var searchQuery: String = ""
+    private var filteredList: ArrayList<User> = userList;
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,7 +30,7 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>):
         holder: UserViewHolder,
         position: Int
     ) {
-        val currentUser = userList[position]
+        val currentUser = filteredList[position]
 
         holder.textName.text = currentUser.name
 
@@ -40,7 +45,17 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>):
     }
 
     override fun getItemCount(): Int {
-        return userList.size
+        return filteredList.size
+    }
+
+    fun setSearchQuery(searchQuery: String): Unit {
+        this.searchQuery = searchQuery
+
+        filteredList = userList.filter { user ->
+            user.name!!.contains(searchQuery, ignoreCase = true)
+        } as ArrayList<User>
+
+        notifyDataSetChanged()
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

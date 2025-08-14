@@ -10,7 +10,6 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:text="@string/messages"
@@ -29,7 +28,7 @@
             app:layout_behavior="@string/searchbar_scrolling_view_behavior">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/userRecyclerView"
+                android:id="@+id/user_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -63,11 +62,11 @@
             app:layout_anchor="@id/search_bar">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/screen_content"
+                android:id="@+id/search_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                tools:listitem="@layout/search_layout" />
+                tools:listitem="@layout/user_layout" />
 
         </com.google.android.material.search.SearchView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

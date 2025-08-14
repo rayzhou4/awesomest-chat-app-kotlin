@@ -11,7 +11,6 @@ import com.example.awesomechatapp.ui.ChatActivity
 import com.example.awesomechatapp.R
 import com.example.awesomechatapp.model.User
 
-
 class UserAdapter(val context: Context, val userList: ArrayList<User>):
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
@@ -57,6 +56,8 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>):
 
         notifyDataSetChanged()
     }
+
+    fun hasNoUsers(): Boolean = filteredList.isEmpty()
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textName = itemView.findViewById<TextView>(R.id.txt_name)

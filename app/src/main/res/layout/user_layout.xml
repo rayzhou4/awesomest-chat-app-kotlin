@@ -11,7 +11,8 @@
         android:text="Fname Lname"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="10dp"
+        android:visibility="visible"/>
 
     <View
         android:id="@+id/view_name"

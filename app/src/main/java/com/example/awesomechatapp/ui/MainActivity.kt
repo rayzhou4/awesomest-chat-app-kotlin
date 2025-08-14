@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.awesomechatapp.R
@@ -30,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchBar: SearchBar
     private lateinit var searchView: SearchView
     private lateinit var userRecyclerView: RecyclerView
+    private lateinit var nestedUserView: NestedScrollView
+    private lateinit var emptyView: View
     private lateinit var userList: ArrayList<User>
     private lateinit var userAdapter: UserAdapter
     private lateinit var mAuth: FirebaseAuth
@@ -55,14 +59,25 @@ class MainActivity : AppCompatActivity() {
                 OnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
                     searchBar.setText(searchView.text)
                     userAdapter.setSearchQuery(searchView.text.toString())
+
+                    if (userAdapter.hasNoUsers()) {
+                        emptyView.visibility = View.VISIBLE
+                        nestedUserView.visibility = View.GONE
+                    } else {
+                        emptyView.visibility = View.GONE
+                        nestedUserView.visibility = View.VISIBLE
+                    }
+
                     searchView.hide()
                     false
                 })
 
         userRecyclerView = findViewById(R.id.user_recycler_view)
-
         userRecyclerView.layoutManager = LinearLayoutManager(this)
         userRecyclerView.adapter = userAdapter
+
+        nestedUserView = findViewById(R.id.nested_user_view)
+        emptyView = findViewById(R.id.empty_view)
 
         mDbRef.child("user").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

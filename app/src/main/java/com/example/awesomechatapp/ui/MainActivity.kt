@@ -12,6 +12,7 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.awesomechatapp.R
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchBar: SearchBar
     private lateinit var searchView: SearchView
     private lateinit var userRecyclerView: RecyclerView
+    private lateinit var searchContent: RecyclerView
     private lateinit var nestedUserView: NestedScrollView
     private lateinit var emptyView: View
     private lateinit var userList: ArrayList<User>
@@ -55,26 +57,45 @@ class MainActivity : AppCompatActivity() {
         searchView = findViewById(R.id.search_view)
         searchView
             .getEditText()
-            .setOnEditorActionListener(
-                OnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
-                    searchBar.setText(searchView.text)
-                    userAdapter.setSearchQuery(searchView.text.toString())
+            .setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
+                Log.d("DEBUGGING", v!!.text.toString())
+                searchBar.setText(v.text)
+                userAdapter.setSearchQuery(v.text.toString())
 
-                    if (userAdapter.hasNoUsers()) {
-                        emptyView.visibility = View.VISIBLE
-                        nestedUserView.visibility = View.GONE
-                    } else {
-                        emptyView.visibility = View.GONE
-                        nestedUserView.visibility = View.VISIBLE
-                    }
+                if (userAdapter.hasNoUsers()) {
+                    emptyView.visibility = View.VISIBLE
+                    nestedUserView.visibility = View.GONE
+                } else {
+                    emptyView.visibility = View.GONE
+                    nestedUserView.visibility = View.VISIBLE
+                }
 
-                    searchView.hide()
-                    false
-                })
+                searchView.hide()
+                false
+            }
+
+        searchView
+            .getEditText()
+            .addTextChangedListener { text ->
+                Log.d("DEBUGGING", text.toString())
+                userAdapter.setSearchQuery(text.toString())
+
+                if (userAdapter.hasNoUsers()) {
+                    emptyView.visibility = View.VISIBLE
+                    nestedUserView.visibility = View.GONE
+                } else {
+                    emptyView.visibility = View.GONE
+                    nestedUserView.visibility = View.VISIBLE
+                }
+            }
 
         userRecyclerView = findViewById(R.id.user_recycler_view)
         userRecyclerView.layoutManager = LinearLayoutManager(this)
         userRecyclerView.adapter = userAdapter
+
+        searchContent = findViewById(R.id.search_content)
+        searchContent.layoutManager = LinearLayoutManager(this)
+        searchContent.adapter = userAdapter
 
         nestedUserView = findViewById(R.id.nested_user_view)
         emptyView = findViewById(R.id.empty_view)

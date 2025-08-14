@@ -14,7 +14,6 @@ import com.example.awesomechatapp.model.User
 class UserAdapter(val context: Context, val userList: ArrayList<User>):
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
-    private var searchQuery: String = ""
     private var filteredList: ArrayList<User> = userList;
 
     override fun onCreateViewHolder(
@@ -48,8 +47,6 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>):
     }
 
     fun setSearchQuery(searchQuery: String): Unit {
-        this.searchQuery = searchQuery
-
         filteredList = userList.filter { user ->
             user.name!!.contains(searchQuery, ignoreCase = true)
         } as ArrayList<User>

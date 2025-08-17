@@ -3,6 +3,7 @@ package com.example.awesomechatapp.ui
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toolbar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Text
@@ -15,6 +16,7 @@ import com.example.awesomechatapp.R
 import com.example.awesomechatapp.adapter.MessageAdapter
 import com.example.awesomechatapp.model.Message
 import com.example.awesomechatapp.ui.theme.AwesomeChatAppTheme
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,6 +26,7 @@ import com.google.firebase.database.ValueEventListener
 
 class ChatActivity : AppCompatActivity() {
 
+    private lateinit var chatToolbar: MaterialToolbar
     private lateinit var chatRecyclerView: RecyclerView
     private lateinit var messageBox: EditText
     private lateinit var sendButton: ImageView
@@ -49,14 +52,18 @@ class ChatActivity : AppCompatActivity() {
         senderRoom = receiverUid + senderUid
         receiverRoom = senderUid + receiverUid
 
-        supportActionBar?.title = name
-
+        // view variables, message data & message adapter init
+        chatToolbar = findViewById(R.id.chatToolbar)
         chatRecyclerView = findViewById(R.id.chatRecyclerView)
         messageBox = findViewById(R.id.messageBox)
         sendButton = findViewById(R.id.sentButton)
         messageList = ArrayList()
         messageAdapter = MessageAdapter(this, messageList)
 
+        // adding the person the user is chatting to the chat toolbar
+        chatToolbar.title = name
+
+        // use LinearLayoutManager to lay messages vertically, and add message adapter
         chatRecyclerView.layoutManager = LinearLayoutManager(this)
         chatRecyclerView.adapter = messageAdapter
 

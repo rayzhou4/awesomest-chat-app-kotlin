@@ -6,12 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.ChatActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/chatToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hot_pink"
+        app:titleTextColor="@android:color/white"
+        app:title="Chat Partner Name" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/chatToolbar"
         android:layout_above="@id/linearLayout"
-        android:layout_alignParentTop="true"
         android:fitsSystemWindows="true"/>
 
     <LinearLayout

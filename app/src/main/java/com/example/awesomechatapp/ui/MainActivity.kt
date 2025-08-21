@@ -58,9 +58,8 @@ class MainActivity : AppCompatActivity() {
         searchView
             .getEditText()
             .setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
-                Log.d("DEBUGGING", v!!.text.toString())
-                searchBar.setText(v.text)
-                userAdapter.setSearchQuery(v.text.toString())
+                searchBar.setText(v?.text)
+                userAdapter.setSearchQuery(v?.text.toString())
 
                 if (userAdapter.hasNoUsers()) {
                     emptyView.visibility = View.VISIBLE

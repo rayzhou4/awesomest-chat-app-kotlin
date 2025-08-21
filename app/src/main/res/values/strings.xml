@@ -12,6 +12,10 @@
     <string name="sign_up">Sign Up</string>
     <string name="sign_up_text">Don\'t have account?</string>
 
+    <!-- Sign Up Activity Strings -->
+    <string name="name">Name</string>
+    <string name="log_in_text">Already have an account?</string>
+
     <!-- Main Activity Strings -->
     <string name="messages">Messages</string>
     <string name="searchbar_hint">Search</string>

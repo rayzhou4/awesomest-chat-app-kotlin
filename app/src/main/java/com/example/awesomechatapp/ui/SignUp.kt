@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.awesomechatapp.R
@@ -18,6 +19,7 @@ class SignUp : AppCompatActivity() {
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
     private lateinit var btnSignup: Button
+    private lateinit var btnLogin: TextView
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
 
@@ -31,6 +33,7 @@ class SignUp : AppCompatActivity() {
         edtEmail = findViewById(R.id.edt_email)
         edtPassword = findViewById(R.id.edt_password)
         btnSignup = findViewById(R.id.btnSignup)
+        btnLogin = findViewById(R.id.btnLogin)
 
         btnSignup.setOnClickListener {
             val name = edtName.text.toString()
@@ -39,6 +42,13 @@ class SignUp : AppCompatActivity() {
 
             signUp(name, email, password)
         }
+
+        btnLogin.setOnClickListener {
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     private fun signUp(name: String, email: String, password: String) {

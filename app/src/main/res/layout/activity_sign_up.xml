@@ -1,64 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/signup_background"
+    tools:context=".ui.MainActivity">
 
     <ImageView
         android:id="@+id/app_logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"/>
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/logo" />
 
-    <EditText
-        android:id="@+id/edt_name"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/app_logo"
-        android:layout_marginTop="30dp"
-        android:hint="Name"
-        android:paddingLeft="15dp"
-        android:background="@drawable/edt_background"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
-
-    <EditText
-        android:id="@+id/edt_email"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/edt_name"
-        android:layout_marginTop="10dp"
-        android:hint="Email"
-        android:paddingLeft="15dp"
-        android:background="@drawable/edt_background"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
-
-    <EditText
-        android:id="@+id/edt_password"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/edt_email"
-        android:layout_marginTop="10dp"
-        android:hint="Password"
-        android:paddingLeft="15dp"
-        android:background="@drawable/edt_background"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
-
-    <Button
-        android:id="@+id/btnSignup"
-        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edt_password"
-        android:text="Sign up"
-        android:background="@drawable/btn_background"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:hint="@string/name"
+        app:boxBackgroundColor="@color/white"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/email">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-</RelativeLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email"
+        app:boxBackgroundColor="@color/white"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        app:boxBackgroundColor="@color/white"
+        app:endIconMode="password_toggle"
+        app:startIconDrawable="@drawable/password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/transparent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        app:cornerRadius="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/sign_up"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in_text"
+            android:textColor="@color/black"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/log_in"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</LinearLayout>
